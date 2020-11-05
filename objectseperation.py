@@ -9,18 +9,18 @@ import numpy as np
 import operator
 import math
 
-I=cv2.imread('egg_flash.jpeg')
+I=cv2.imread('Input/egg_flash.jpeg')
 contour = np.copy(I)
 
 cv2.imshow("Original Image",I)
 gray = cv2.cvtColor(I,cv2.COLOR_BGR2GRAY)
 
 cv2.imshow("GrayScale Image",gray)
-cv2.imwrite("Grayscale.jpg",gray)
+cv2.imwrite("Output/Grayscale.jpg",gray)
 ret, thresh = cv2.threshold(gray,0,255,cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
 
 cv2.imshow("Threshold Image",thresh)
-cv2.imwrite("Seperation.jpg",thresh)
+cv2.imwrite("Output/Seperation.jpg",thresh)
 points = zip(*np.where(thresh == 0))
 
 #distance = math.sqrt( ((min(x)-max(x))**2)+((min(y)-max(y))**2) )
@@ -89,7 +89,6 @@ else:
     point_3.append((least_2[-1],least_2[0]))
     point_4.append((highest_2[1],highest_2[0]))
 
-det = point_4[1]
 
 for i in range(1,len(least)):
     contour[least[0]][least[i]] = 0
@@ -111,10 +110,10 @@ for i in range(len(thresh)):
        contour[i][max(cnt_points[0])]=0
     
 cv2.imshow("Contout Image",contour)
-cv2.imwrite("Contour.jpg",contour)
+cv2.imwrite("Output/Contour.jpg",contour)
     
 cv2.imshow("Line Image",I)
-cv2.imwrite("Lines.jpg",I)
+cv2.imwrite("Output/Lines.jpg",I)
 cv2.waitKey(0)
 
 
